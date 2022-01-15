@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+module mygoadmin
+
+go 1.16
+=======
 module goddd
 
 go 1.16
@@ -16,3 +21,4 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gorm.io/gorm v1.22.5
 )
+>>>>>>> 693fe26a5fd7b7ee186a22816ed9edab9b1a620a
