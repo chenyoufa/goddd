@@ -2,26 +2,29 @@ package global
 
 import (
 	"sync"
+	"time"
 
 	"thrgo/config"
 
+	"thrgo/utils/timer"
+
 	"github.com/go-redis/redis"
-	"github.com/jinzhu/gorm"
 	"github.com/songzhibin97/gkit/cache/local_cache"
 	"github.com/songzhibin97/gkit/cache/singleflight"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
+	"gorm.io/gorm"
 )
 
 var (
-	GVA_DB     *gorm.DB
-	GVA_DBList map[string]*gorm.DB
-	GVA_REDIS  *redis.Client
-	GVA_CONFIG config.Server
-	GVA_VP     *viper.Viper //文件配置读取
-	GVA_LOG    *zap.Logger
-	// GVA_Timer time.Time = timer.NewTimerTask()
-	GVA_Concurrency_Control = &singleflight.Group{}
+	GVA_DB                  *gorm.DB
+	GVA_DBList              map[string]*gorm.DB
+	GVA_REDIS               *redis.Client
+	GVA_CONFIG              config.Server
+	GVA_VP                  *viper.Viper //文件配置读取
+	GVA_LOG                 *zap.Logger
+	GVA_Timer               time.Time = timer.NewTimerTask()
+	GVA_Concurrency_Control           = &singleflight.Group{}
 	BlackCache              local_cache.Cache
 	lock                    sync.RWMutex //读写锁
 )
