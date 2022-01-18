@@ -2,7 +2,6 @@ package initialize
 
 import (
 	"fmt"
-
 	"thrgo/config"
 	"thrgo/global"
 	"thrgo/utils"

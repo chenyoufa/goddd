@@ -1,0 +1,54 @@
+[thrgo]2022/01/18 - 15:02:47.963	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/gorm.go:56	register table success
+[thrgo]2022/01/18 - 15:02:47.966	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:33	use middleware logger
+[thrgo]2022/01/18 - 15:02:47.968	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:37	use middleware cors
+[thrgo]2022/01/18 - 15:02:47.969	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:39	register swagger handler
+[thrgo]2022/01/18 - 15:02:47.969	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:85	router register success
+[thrgo]2022/01/18 - 15:02:47.969	[34minfo[0m	/home/fage/workspace/go/thrgo/core/server.go:38	server run success on 	{"address": ":8888"}
+[thrgo]2022/01/18 - 15:36:29.546	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/gorm.go:56	register table success
+[thrgo]2022/01/18 - 15:36:29.546	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:33	use middleware logger
+[thrgo]2022/01/18 - 15:36:29.546	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:37	use middleware cors
+[thrgo]2022/01/18 - 15:36:29.547	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:39	register swagger handler
+[thrgo]2022/01/18 - 15:36:29.547	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:85	router register success
+[thrgo]2022/01/18 - 15:36:29.547	[34minfo[0m	/home/fage/workspace/go/thrgo/core/server.go:38	server run success on 	{"address": ":8888"}
+[thrgo]2022/01/18 - 15:48:57.170	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/gorm.go:56	register table success
+[thrgo]2022/01/18 - 15:48:57.170	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:33	use middleware logger
+[thrgo]2022/01/18 - 15:48:57.170	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:37	use middleware cors
+[thrgo]2022/01/18 - 15:48:57.170	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:39	register swagger handler
+[thrgo]2022/01/18 - 15:48:57.171	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:85	router register success
+[thrgo]2022/01/18 - 15:48:57.178	[34minfo[0m	/home/fage/workspace/go/thrgo/core/server.go:38	server run success on 	{"address": ":8888"}
+[thrgo]2022/01/18 - 15:51:35.325	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/gorm.go:56	register table success
+[thrgo]2022/01/18 - 15:51:35.325	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:33	use middleware logger
+[thrgo]2022/01/18 - 15:51:35.325	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:37	use middleware cors
+[thrgo]2022/01/18 - 15:51:35.326	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:39	register swagger handler
+[thrgo]2022/01/18 - 15:51:35.326	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:85	router register success
+[thrgo]2022/01/18 - 15:51:35.326	[34minfo[0m	/home/fage/workspace/go/thrgo/core/server.go:38	server run success on 	{"address": ":8888"}
+[thrgo]2022/01/18 - 15:51:55.670	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/gorm.go:56	register table success
+[thrgo]2022/01/18 - 15:51:55.670	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:33	use middleware logger
+[thrgo]2022/01/18 - 15:51:55.670	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:37	use middleware cors
+[thrgo]2022/01/18 - 15:51:55.671	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:39	register swagger handler
+[thrgo]2022/01/18 - 15:51:55.671	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:85	router register success
+[thrgo]2022/01/18 - 15:51:55.671	[34minfo[0m	/home/fage/workspace/go/thrgo/core/server.go:38	server run success on 	{"address": ":8888"}
+[thrgo]2022/01/18 - 15:53:30.429	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/gorm.go:56	register table success
+[thrgo]2022/01/18 - 15:53:30.430	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:33	use middleware logger
+[thrgo]2022/01/18 - 15:53:30.430	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:37	use middleware cors
+[thrgo]2022/01/18 - 15:53:30.430	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:39	register swagger handler
+[thrgo]2022/01/18 - 15:53:30.432	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:85	router register success
+[thrgo]2022/01/18 - 15:53:30.435	[34minfo[0m	/home/fage/workspace/go/thrgo/core/server.go:38	server run success on 	{"address": ":8888"}
+[thrgo]2022/01/18 - 15:53:53.392	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/gorm.go:56	register table success
+[thrgo]2022/01/18 - 15:53:53.392	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:33	use middleware logger
+[thrgo]2022/01/18 - 15:53:53.392	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:37	use middleware cors
+[thrgo]2022/01/18 - 15:53:53.392	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:39	register swagger handler
+[thrgo]2022/01/18 - 15:53:53.393	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:85	router register success
+[thrgo]2022/01/18 - 15:53:53.393	[34minfo[0m	/home/fage/workspace/go/thrgo/core/server.go:38	server run success on 	{"address": ":8888"}
+[thrgo]2022/01/18 - 15:55:14.733	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/gorm.go:56	register table success
+[thrgo]2022/01/18 - 15:55:14.734	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:33	use middleware logger
+[thrgo]2022/01/18 - 15:55:14.734	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:37	use middleware cors
+[thrgo]2022/01/18 - 15:55:14.734	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:39	register swagger handler
+[thrgo]2022/01/18 - 15:55:14.735	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:85	router register success
+[thrgo]2022/01/18 - 15:55:14.735	[34minfo[0m	/home/fage/workspace/go/thrgo/core/server.go:38	server run success on 	{"address": ":8888"}
+[thrgo]2022/01/18 - 15:55:31.200	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/gorm.go:56	register table success
+[thrgo]2022/01/18 - 15:55:31.200	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:33	use middleware logger
+[thrgo]2022/01/18 - 15:55:31.201	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:37	use middleware cors
+[thrgo]2022/01/18 - 15:55:31.201	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:39	register swagger handler
+[thrgo]2022/01/18 - 15:55:31.201	[34minfo[0m	/home/fage/workspace/go/thrgo/initialize/router.go:85	router register success
+[thrgo]2022/01/18 - 15:55:31.201	[34minfo[0m	/home/fage/workspace/go/thrgo/core/server.go:38	server run success on 	{"address": ":8888"}

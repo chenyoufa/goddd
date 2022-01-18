@@ -5,7 +5,8 @@ import (
 
 	systemRes "thrgo/model/system/response"
 
-	"github.com/flipped-aurora/gin-vue-admin/server/global"
+	"thrgo/global"
+
 	"github.com/gin-gonic/gin"
 	"github.com/mojocn/base64Captcha"
 	"go.uber.org/zap"

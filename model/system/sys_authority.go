@@ -14,3 +14,7 @@ type SysAuthority struct {
 	SysBaseMenus    []SysBaseMenu  `json:"menus" gorm:"many2many:sys_authority_menus"`
 	DefaultRouter   string         `json:"defaultRouter" gorm:"comment:默认菜单;default:dashboard"` // 默认菜单(默认dashboard)
 }
+
+func (s *SysAuthority) TableName() string {
+	return "sys_authority"
+}

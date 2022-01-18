@@ -8,7 +8,7 @@ import (
 	"thrgo/global"
 	"thrgo/utils"
 
-	_ "github.com/flipped-aurora/gin-vue-admin/server/packfile"
+	_ "thrgo/packfile"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
@@ -16,6 +16,7 @@ import (
 
 func Viper(path ...string) *viper.Viper {
 	var config string
+
 	if len(path) == 0 {
 		flag.StringVar(&config, "c", "", "choose config file.")
 		flag.Parse()
@@ -59,5 +60,6 @@ func Viper(path ...string) *viper.Viper {
 	// global.BlackCache = local_cache.NewCache(
 	// 	local_cache.SetDefaultExpire(time.Second * time.Duration(global.GVA_CONFIG.JWT.ExpiresTime)),
 	// )
+
 	return v
 }
