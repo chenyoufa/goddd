@@ -35,6 +35,8 @@ func (b *BaseApi) GetUserList(c *gin.Context) {
 	if err := utils.Verify(pageinfo, utils.PageInfoVerify); err != nil {
 		response.FailWithMessage(err.Error(), c)
 	}
+	// var uc = new(us.UserService)
+	//  uc.GetUserInfoList()
 	if list, total, err := userService.GetUserInfoList(pageinfo); err != nil {
 		global.GVA_LOG.Error("获取失败!", zap.Error(err))
 		response.FailWithMessage("获取失败", c)

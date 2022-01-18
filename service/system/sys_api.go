@@ -10,7 +10,7 @@ import (
 
 type ApiService struct{}
 
-var ApiServiceApp = new(ApiService)
+// var ApiServiceApp = new(ApiService)
 
 func (apiService *ApiService) CreateApi(api system.SysApi) (err error) {
 	if !errors.Is(
