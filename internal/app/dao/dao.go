@@ -7,7 +7,15 @@ import (
 	"gorm.io/gorm"
 )
 
-var RepoSet = wire.NewSet(user.UserSet)
+//仓储统一注入
+var RepoSet = wire.NewSet(
+	user.UserSet,
+)
+
+//仓储统一入库
+type (
+	UserRepo = user.UserRepo
+)
 
 // Auto migration for given models
 func AutoMigrate(db *gorm.DB) error {
