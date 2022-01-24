@@ -66,5 +66,9 @@ type (
 )
 
 func NewTraceIDContext(ctx context.Context, traceID string) context.Context {
-	return context.WithValue(ctx, tranceIDKey{}, tranceID)
+	return context.WithValue(ctx, traceIDKey{}, traceID)
+}
+
+func FormTraceIDContext(ctx context.Context) string {
+	v := ctx.Value(tranceid)
 }
