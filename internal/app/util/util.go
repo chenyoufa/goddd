@@ -18,12 +18,14 @@ type Model struct {
 
 // Get gorm.DB from context
 func GetDB(ctx context.Context, defDB *gorm.DB) *gorm.DB {
-	trans, ok := contextx.FromTrans(ctx)
-	if ok && !contextx.FromNoTrans(ctx) {
+
+	trans, ok := contextx.FromTrans(ctx) //【事物】
+
+	if ok && !contextx.FromNoTrans(ctx) { //开启【事物】  并且   没启动【不使用事物】
 		db, ok := trans.(*gorm.DB)
 		if ok {
-			if contextx.FromTransLock(ctx) {
-				db = db.Clauses(clause.Locking{Strength: "UPDATE"})
+			if contextx.FromTransLock(ctx) { //
+				db = db.Clauses(clause.Locking{Strength: "UPDATE"}) //for update 支持   悲观锁
 			}
 			return db
 		}

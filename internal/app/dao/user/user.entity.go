@@ -9,6 +9,8 @@ import (
 	"gorm.io/gorm"
 )
 
+//1每个request 一个 gotinue ，超时停止数据库等资源访问， token cookie 各个 reques 共享
+//2  封装事物和其他gorm 操作
 func GetUserDB(ctx context.Context, defDB *gorm.DB) *gorm.DB {
 	return util.GetDBWithModel(ctx, defDB, new(User))
 }

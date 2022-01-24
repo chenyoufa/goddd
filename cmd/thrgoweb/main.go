@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+
 	config.MustLoad("configs/config.toml")
 
 	appa.Run()
