@@ -73,6 +73,7 @@ func SetLevel(levels ...logrus.Level) Option {
 	}
 }
 
+//实现 logrus 的 Hook 接口  Levels   exec
 type Hook struct {
 	opts options
 	q    *queue.Queue
