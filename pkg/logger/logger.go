@@ -7,8 +7,13 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+//设置日志等级
+//TraceID/UserID 等关键字段的输出
+//支持日志钩子写入到`Gorm`
+//设置日志输出类型 json/txt
+
 // Logger Logrus
-type Logger = logrus.Logger
+// type Logger = logrus.Logger
 
 // Entry logrus.Entry alias
 type Entry = logrus.Entry
@@ -154,16 +159,16 @@ func WithContext(ctx context.Context) *Entry {
 	return logrus.WithContext(ctx).WithFields(fields)
 }
 
-var (
-	Tracef         = logrus.Tracef
-	Debugf         = logrus.Debugf
-	Infof          = logrus.Infof
-	Warnf          = logrus.Warnf
-	Errorf         = logrus.Errorf
-	Fatalf         = logrus.Fatal
-	Panicf         = logrus.Panicf
-	Printf         = logrus.Printf
-	SetOutput      = logrus.SetReportCaller
-	StandardLogger = logrus.StandardLogger
-	ParseLevel     = logrus.ParseLevel
-)
+// var (
+// 	Tracef         = logrus.Tracef
+// 	Debugf         = logrus.Debugf
+// 	Infof          = logrus.Infof
+// 	Warnf          = logrus.Warnf
+// 	Errorf         = logrus.Errorf
+// 	Fatalf         = logrus.Fatal
+// 	Panicf         = logrus.Panicf
+// 	Printf         = logrus.Printf
+// 	SetOutput      = logrus.SetReportCaller
+// 	StandardLogger = logrus.StandardLogger
+// 	ParseLevel     = logrus.ParseLevel
+// )

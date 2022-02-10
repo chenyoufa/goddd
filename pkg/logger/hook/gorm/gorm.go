@@ -21,14 +21,6 @@ type Logger struct {
 	Data      string    `gorm:"type:text"`
 	CreatedAt time.Time `gorm:"index"`
 }
-
-func New(db *gorm.DB) *Hook {
-	db.AutoMigrate(new(Logger))
-	return &Hook{
-		db: db,
-	}
-}
-
 type Hook struct {
 	db *gorm.DB
 }
@@ -61,4 +53,11 @@ func (h *Hook) Close() error {
 		return err
 	}
 	return db.Close()
+}
+
+func New(db *gorm.DB) *Hook {
+	db.AutoMigrate(new(Logger))
+	return &Hook{
+		db: db,
+	}
 }

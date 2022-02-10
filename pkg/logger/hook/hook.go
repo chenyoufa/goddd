@@ -22,6 +22,7 @@ var defaultOptions = options{
 	},
 }
 
+//gorm 定义接口
 type ExecCloser interface {
 	Exec(entry *logrus.Entry) error
 	Close() error
@@ -78,20 +79,6 @@ type Hook struct {
 	e    ExecCloser
 }
 
-func New(exec ExecCloser, opt ...Option) *Hook {
-	opts := defaultOptions
-	for _, o := range opt {
-		o(&opts)
-	}
-	q := queue.NewQueue(opts.maxQueues, opts.maxWorkers)
-	q.Run()
-	return &Hook{
-		opts: opts,
-		q:    q,
-		e:    exec,
-	}
-}
-
 func (h *Hook) Levels() []logrus.Level {
 	return h.opts.levels
 }
@@ -120,4 +107,18 @@ func (h *Hook) Fire(entry *logrus.Entry) error {
 func (h *Hook) Flush() {
 	h.q.Terminate()
 	h.e.Close()
+}
+
+func New(exec ExecCloser, opt ...Option) *Hook {
+	opts := defaultOptions
+	for _, o := range opt {
+		o(&opts)
+	}
+	q := queue.NewQueue(opts.maxQueues, opts.maxWorkers)
+	q.Run()
+	return &Hook{
+		opts: opts,
+		q:    q,
+		e:    exec,
+	}
 }

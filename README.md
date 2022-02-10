@@ -46,7 +46,7 @@
 ## 特性
 
 - fage 遵循 `RESTful API` 设计规范 & 基于接口的编程规范    
-- fage 基于 `GIN` 框架，提供了丰富的中间件支持（JWTAuth、CORS、RequestLogger、RequestRateLimiter、TraceID、CasbinEnforce、Recover、GZIP）
+- fage 基于 `GIN` 框架，提供了丰富的中间件支持（JWTAuth、CORS、RequestLogger、RequestRateLimiter、TraceID (链路追踪)、CasbinEnforce、Recover、GZIP）
 - 基于 `Casbin` 的 RBAC 访问控制模型 -- **权限控制可以细粒度到按钮 & 接口**
 - fage 基于 `Gorm 2.0` 的数据库访问层 - 全功能 ORM   
 - fage 基于 `WIRE` 的依赖注入 -- 依赖注入本身的作用是解决了各个模块间层级依赖繁琐的初始化过程
