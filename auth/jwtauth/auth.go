@@ -5,7 +5,7 @@ import (
 	"gdemo1/auth"
 	"time"
 
-	"github.com/dgrijalva/jwt-go"
+	jwt "github.com/dgrijalva/jwt-go"
 )
 
 const defaultKey = "gin-admin"
@@ -62,7 +62,8 @@ func SetExpired(expired int) func(*options) {
 }
 
 type JWTAuth struct {
-	opts *options
+	opts   *options
+	storer Storer
 }
 
 //生成令牌
@@ -95,12 +96,24 @@ func (a *JWTAuth) parseToken(tokenString string) (*jwt.StandardClaims, error) {
 	return token.Claims.(*jwt.StandardClaims), nil
 }
 
+//抽象了一个函数，简洁代码。异步执行
+func (a *JWTAuth) callStore(fn func(Storer) error) error {
+	if store := a.storer; store != nil {
+		return fn(store)
+	}
+	return nil
+}
+
 //销毁
 func (jt *JWTAuth) DestroyToken(ctx context.Context, tokenString string) error {
 	claims, err := jt.parseToken(tokenString)
 	if err != nil {
 		return err
 	}
+	return jt.callStore(func(s Storer) error {
+		expired := time.Unix(claims.ExpiresAt, 0).Sub(time.Now())
+		return s.Set(ctx, tokenString, expired)
+	})
 }
 
 //解析用户ID
@@ -112,11 +125,34 @@ func (jt *JWTAuth) ParseUserID(ctx context.Context, tokenString string) (string,
 	if err != nil {
 		return "", err
 	}
-
+	err = jt.callStore(func(store Storer) error {
+		if exists, err := store.Check(ctx, tokenString); err != nil {
+			return err
+		} else if exists {
+			return auth.ErrInvalidToken
+		}
+		return nil
+	})
+	if err != nil {
+		return "", err
+	}
 	return claims.Subject, nil
 }
 
 //释放资源
 func (jt *JWTAuth) Release() error {
+	return jt.callStore(func(s Storer) error {
+		return s.Close()
+	})
+}
 
+func New(store Storer, opts ...Option) *JWTAuth {
+	o := defaultOptions
+	for _, opt := range opts {
+		opt(&o)
+	}
+	return &JWTAuth{
+		opts:   &o,
+		storer: store,
+	}
 }

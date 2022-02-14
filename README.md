@@ -4,4 +4,5 @@
 
 - 基于 `go mod` 的依赖管理(国内源可使用：<https://goproxy.cn/>)
 
-- JWTAuth
+- JWTAuth 
+- Test  go test * | *.go
