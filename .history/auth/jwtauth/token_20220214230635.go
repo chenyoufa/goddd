@@ -24,5 +24,5 @@ func (a *Tokeninfo) GetExpiresAt() int64 {
 
 // JSON编码
 func (a *Tokeninfo) EncodeToJSON() ([]byte, error) {
-	return json.Marshal(a)
+	return json.Marshal(t)
 }

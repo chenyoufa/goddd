@@ -12,31 +12,22 @@ type Options struct {
 	expiretime    int
 	signingMethod jwt.SigningMethod
 	signingKey    interface{}
-	TokenType     string
 }
 
 type JWTAuth struct {
-	opts *Options
+	opts Options
 }
 
 func (a *JWTAuth) GenerateToken(ctx context.Context, userID string) (auth.TokenInfo, error) {
 	now := time.Now()
 	expiresAt := now.Add(time.Duration(a.opts.expiretime)).Unix()
-	token := jwt.NewWithClaims(a.opts.signingMethod, jwt.StandardClaims{
+	token := jwt.NewWithClaims(a.opts.SigningMethod, jwt.StandardClaims{
 		IssuedAt:  now.Unix(),
 		NotBefore: now.Unix(),
 		ExpiresAt: expiresAt,
 		Subject:   userID,
 	})
-	tokenstring, err := token.SignedString(a.opts.signingKey)
-	if err != nil {
-		return nil, err
-	}
-	return &Tokeninfo{
-		AccessToken: tokenstring,
-		TokenType:   a.opts.TokenType,
-		ExpiresAt:   expiresAt,
-	}, nil
+	tokeinfo := token.SigningString(a.o)
 }
 func (a *JWTAuth) DestroyToken(ctx context.Context, accessToken string) error {
 

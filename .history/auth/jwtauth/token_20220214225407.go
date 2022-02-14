@@ -1,7 +1,5 @@
 package jwtauth
 
-import "encoding/json"
-
 type Tokeninfo struct {
 	AccessToken string `json:"access_token"`
 	TokenType   string `json:"toke_type"`
@@ -24,5 +22,5 @@ func (a *Tokeninfo) GetExpiresAt() int64 {
 
 // JSON编码
 func (a *Tokeninfo) EncodeToJSON() ([]byte, error) {
-	return json.Marshal(a)
+
 }

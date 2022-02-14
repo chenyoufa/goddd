@@ -6,7 +6,7 @@ type TokenInfo interface {
 	GetAccessToken() string
 	GetTokenType() string
 	GetExpiresAt() int64
-	EncodeToJSON() ([]byte, error)
+	EncodeJSON() (byte, error)
 }
 
 type Auther interface {
