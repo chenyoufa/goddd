@@ -1,17 +1,25 @@
 package auth
 
-import "context"
+import (
+	"context"
+	"errors"
+)
 
-type TokenInfo interface {
+var (
+	ErrInvalidToken = errors.New("invalid token")
+)
+
+//接口信息接口
+type TokenInfoer interface {
 	GetAccessToken() string
 	GetTokenType() string
-	GetExpiresAt() int64
-	EncodeToJSON() ([]byte, error)
+	GetExitAT() int64
+	EncodeToJson() ([]byte, error)
 }
 
 type Auther interface {
-	GenerateToken(ctx context.Context) (TokenInfo, error)
-	DestroyToken(ctx context.Context, accessToken string) error
-	ParseUserID(ctx context.Context, accessToken string) (string, error)
+	GeneraToken(ctx context.Context, userID string) (TokenInfoer, error)
+	DestoryToken(ctx context.Context, tokenString string) error
+	ParseUserId(ctx context.Context, tokenString string) (int64, error)
 	Release() error
 }
