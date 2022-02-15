@@ -34,23 +34,3 @@ func WrapResponse(err error, code, status int, msg string, args ...interface{}) 
 func Wrap400Response(err error, msg string, args ...interface{}) error {
 	return WrapResponse(err, 0, 400, msg, args...)
 }
-func Wrap500Response(err error, msg string, args ...interface{}) error {
-	return WrapResponse(err, 0, 500, msg, args...)
-}
-
-func NewResponse(code, status int, msg string, args ...interface{}) error {
-	res := &ResponseError{
-		Code:    code,
-		Message: fmt.Sprintf(msg, args...),
-		Status:  status,
-	}
-	return res
-}
-
-func New400Response(msg string, args ...interface{}) error {
-	return NewResponse(0, 400, msg, args...)
-}
-
-func New500Response(msg string, args ...interface{}) error {
-	return NewResponse(0, 500, msg, args...)
-}

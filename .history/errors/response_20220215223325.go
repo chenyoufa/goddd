@@ -42,15 +42,5 @@ func NewResponse(code, status int, msg string, args ...interface{}) error {
 	res := &ResponseError{
 		Code:    code,
 		Message: fmt.Sprintf(msg, args...),
-		Status:  status,
 	}
-	return res
-}
-
-func New400Response(msg string, args ...interface{}) error {
-	return NewResponse(0, 400, msg, args...)
-}
-
-func New500Response(msg string, args ...interface{}) error {
-	return NewResponse(0, 500, msg, args...)
 }
