@@ -18,7 +18,6 @@ type Config struct {
 }
 
 func createDatabaseWithMySQL(cfg *mysqlDriver.Config) error {
-
 	dsn := fmt.Sprintf("%s:%s@tcp(%s)/", cfg.User, cfg.Passwd, cfg.Addr)
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {

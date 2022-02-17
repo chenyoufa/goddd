@@ -18,14 +18,6 @@ type Config struct {
 }
 
 func createDatabaseWithMySQL(cfg *mysqlDriver.Config) error {
-
-	dsn := fmt.Sprintf("%s:%s@tcp(%s)/", cfg.User, cfg.Passwd, cfg.Addr)
-	db, err := sql.Open("mysql", dsn)
-	if err != nil {
-		return err
-	}
-	defer db.Close()
-	query := fmt.Sprintf("CREATE DATABASE IF NOT EXISTS `%s` DEFAULT character set=`utf8mb4`;", cfg.DBName)
-	_, err = db.Exec(query)
-	return err
+	dsn := fmt.Sprintf("%s:%s@tcp(%s)/", cfg.u)
+	db, err := sql.Open()
 }

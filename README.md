@@ -5,6 +5,7 @@
 
 
 - JWTAuth 
+<<<<<<< HEAD
 - Test  go test * | *.go
 
 - swagger (丝袜哥)
@@ -16,3 +17,7 @@
 
 
 - wire  go 注入
+=======
+- Swaggo
+- Test  go test * | *.go
+>>>>>>> 234429a32c621ec9bd8be47bc4e627a30f43f448
