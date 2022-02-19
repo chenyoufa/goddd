@@ -1,8 +1,6 @@
 package gormx
 
 import (
-	"database/sql"
-	"fmt"
 	"strings"
 	"time"
 
@@ -20,8 +18,8 @@ type Config struct {
 	DSN          string
 	MaxOpenConns int
 	MaxLifeConns int
-	MaxLifeTime  time.Duration
-	MaxIdleTime  time.Duration
+	MaxLifeTime  time.Time
+	MaxdeleTime  time.Time
 	TablePrefix  string
 }
 
@@ -30,15 +28,6 @@ func (c *Config) New() (*gorm.DB, error) {
 	var dialector gorm.Dialector
 	switch strings.ToLower(c.DbType) {
 	case "mysql":
-
-		conf, err := sqldriver.ParseDSN(c.DSN)
-		if err != nil {
-			return nil, err
-		}
-		err = CreateDatabaseMysql(conf)
-		if err != nil {
-			return nil, err
-		}
 
 		dialector = mysql.Open(c.DSN)
 	case "postgres":
@@ -58,21 +47,9 @@ func (c *Config) New() (*gorm.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	sqldb.SetConnMaxLifetime(c.MaxLifeTime)
-	sqldb.SetConnMaxIdleTime(c.MaxIdleTime)
-	sqldb.SetMaxOpenConns(c.MaxOpenConns)
-
-	return db, nil
+	sqldb.SetConnMaxLifetime(c.MaxLifeMaxLifeTimeTime)
 }
 
-func CreateDatabaseMysql(config *sqldriver.Config) error {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s)", config.User, config.Passwd, config.Addr)
-	db, err := sql.Open("mysql", dsn)
-	if err != nil {
-		return nil
-	}
-	defer db.Close()
-	query := fmt.Sprintf("create database if not exists `%s` default character set=`utf8mb4`;", config.DBName)
-	_, err = db.Exec(query)
-	return err
+func CreateDatabaseMysql(config *sqldriver.Config) {
+
 }

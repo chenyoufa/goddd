@@ -71,7 +71,6 @@ func CreateDatabaseMysql(config *sqldriver.Config) error {
 	if err != nil {
 		return nil
 	}
-	defer db.Close()
 	query := fmt.Sprintf("create database if not exists `%s` default character set=`utf8mb4`;", config.DBName)
 	_, err = db.Exec(query)
 	return err

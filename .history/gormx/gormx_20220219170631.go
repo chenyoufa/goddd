@@ -1,8 +1,6 @@
 package gormx
 
 import (
-	"database/sql"
-	"fmt"
 	"strings"
 	"time"
 
@@ -31,14 +29,7 @@ func (c *Config) New() (*gorm.DB, error) {
 	switch strings.ToLower(c.DbType) {
 	case "mysql":
 
-		conf, err := sqldriver.ParseDSN(c.DSN)
-		if err != nil {
-			return nil, err
-		}
-		err = CreateDatabaseMysql(conf)
-		if err != nil {
-			return nil, err
-		}
+		conf := sqldriver.ParseDSN(c.DSN)
 
 		dialector = mysql.Open(c.DSN)
 	case "postgres":
@@ -65,14 +56,6 @@ func (c *Config) New() (*gorm.DB, error) {
 	return db, nil
 }
 
-func CreateDatabaseMysql(config *sqldriver.Config) error {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s)", config.User, config.Passwd, config.Addr)
-	db, err := sql.Open("mysql", dsn)
-	if err != nil {
-		return nil
-	}
-	defer db.Close()
-	query := fmt.Sprintf("create database if not exists `%s` default character set=`utf8mb4`;", config.DBName)
-	_, err = db.Exec(query)
-	return err
+func CreateDatabaseMysql(config *sqldriver.Config) {
+
 }

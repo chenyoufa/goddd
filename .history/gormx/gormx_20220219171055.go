@@ -1,7 +1,6 @@
 package gormx
 
 import (
-	"database/sql"
 	"fmt"
 	"strings"
 	"time"
@@ -35,9 +34,9 @@ func (c *Config) New() (*gorm.DB, error) {
 		if err != nil {
 			return nil, err
 		}
-		err = CreateDatabaseMysql(conf)
+		err := CreateDatabaseMysql(conf)
 		if err != nil {
-			return nil, err
+			return err
 		}
 
 		dialector = mysql.Open(c.DSN)
@@ -65,14 +64,12 @@ func (c *Config) New() (*gorm.DB, error) {
 	return db, nil
 }
 
-func CreateDatabaseMysql(config *sqldriver.Config) error {
+func CreateDatabaseMysql(config *sqldriver.Config) {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s)", config.User, config.Passwd, config.Addr)
-	db, err := sql.Open("mysql", dsn)
+	dialector := mysql.Open(dsn)
+	db, err := gorm.Open(dialector)
 	if err != nil {
-		return nil
+		return err
 	}
-	defer db.Close()
-	query := fmt.Sprintf("create database if not exists `%s` default character set=`utf8mb4`;", config.DBName)
-	_, err = db.Exec(query)
-	return err
+	query := fmt.Sprintf("create database if not existis `%s` default character set=`utf8mb4`;")
 }

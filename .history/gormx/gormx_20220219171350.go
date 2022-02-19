@@ -35,9 +35,9 @@ func (c *Config) New() (*gorm.DB, error) {
 		if err != nil {
 			return nil, err
 		}
-		err = CreateDatabaseMysql(conf)
+		err := CreateDatabaseMysql(conf)
 		if err != nil {
-			return nil, err
+			return err
 		}
 
 		dialector = mysql.Open(c.DSN)
@@ -71,8 +71,7 @@ func CreateDatabaseMysql(config *sqldriver.Config) error {
 	if err != nil {
 		return nil
 	}
-	defer db.Close()
-	query := fmt.Sprintf("create database if not exists `%s` default character set=`utf8mb4`;", config.DBName)
-	_, err = db.Exec(query)
+	query := fmt.Sprintf("create database if not existis `%s` default character set=`utf8mb4`;")
+	_, err := db.Exec(query)
 	return err
 }
