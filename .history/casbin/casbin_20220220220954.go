@@ -1,0 +1,3 @@
+package casbin
+
+func Check()
