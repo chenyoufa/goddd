@@ -18,7 +18,8 @@ func check(e *casbin.Enforcer, sub, obj, act string) bool {
 	return ok
 }
 
-func New() bool {
+// Access Control List
+func ACL() bool {
 
 	str, _ := os.Getwd()
 	fmt.Println(str)
@@ -42,4 +43,10 @@ func New() bool {
 		return true
 	}
 	return false
+}
+
+// role-based-access-control
+func RBAC() bool {
+
+	return true
 }

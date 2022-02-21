@@ -13,11 +13,12 @@
     gormx 扩展
     mysql、postgres、sqlite
 
-- restful理论
+- restful 理论  
 - redis
 
 mq
 http/net  socket tcp websocket
+
 多线程
 数据库分库分表、优化
 微服务

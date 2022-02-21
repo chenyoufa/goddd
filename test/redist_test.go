@@ -18,7 +18,7 @@ func TestStore(t *testing.T) {
 	fmt.Println()
 
 	store := redis.NewStore(&redis.Config{
-		Addr:      addr,
+		Address:   addr,
 		DB:        1,
 		KeyPrefix: "prefix",
 	})

@@ -30,7 +30,7 @@ type Store struct {
 	prefix string
 }
 
-func (store *Store) NewStore(cfg *Config) *Store {
+func NewStore(cfg *Config) *Store {
 	cli := redis.NewClient(&redis.Options{
 		Addr:     cfg.Address,
 		DB:       cfg.DB,

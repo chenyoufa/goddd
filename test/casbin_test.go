@@ -9,6 +9,6 @@ import (
 
 func TestCasbin(t *testing.T) {
 
-	bl := casbin.New()
+	bl := casbin.ACL()
 	assert.True(t, bl)
 }

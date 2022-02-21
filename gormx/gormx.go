@@ -26,7 +26,6 @@ type Config struct {
 }
 
 func (c *Config) New() (*gorm.DB, error) {
-	dsn := fmt.Sprintf("%s:%s@(%s)", cfg.User, cfg.Passwd, cfg.Addr)
 	var dialector gorm.Dialector
 	switch strings.ToLower(c.DbType) {
 	case "mysql":
