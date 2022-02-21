@@ -26,10 +26,7 @@ type Config struct {
 }
 
 func (c *Config) New() (*gorm.DB, error) {
-
-<<<<<<< HEAD
 	dsn := fmt.Sprintf("%s:%s@(%s)", cfg.User, cfg.Passwd, cfg.Addr)
-=======
 	var dialector gorm.Dialector
 	switch strings.ToLower(c.DbType) {
 	case "mysql":
@@ -70,17 +67,13 @@ func (c *Config) New() (*gorm.DB, error) {
 
 func CreateDatabaseMysql(config *sqldriver.Config) error {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s)", config.User, config.Passwd, config.Addr)
->>>>>>> ad726188d71d29aae78c48e602ee8666f385cfce
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		return nil
 	}
 	defer db.Close()
-<<<<<<< HEAD
-	query := fmt.Sprintf("create database   if  not exists `%s`  default  character set=`utf8mb4` ;", cfg.DBName)
-=======
+
 	query := fmt.Sprintf("create database if not exists `%s` default character set=`utf8mb4`;", config.DBName)
->>>>>>> ad726188d71d29aae78c48e602ee8666f385cfce
 	_, err = db.Exec(query)
 	return err
 }
