@@ -9,7 +9,9 @@ import (
 )
 
 func check(e *casbin.Enforcer, sub, obj, act string) bool {
+
 	ok, _ := e.Enforce(sub, obj, act)
+
 	if ok {
 		fmt.Printf("%s CAN %s %s \n", sub, act, obj)
 	} else {
@@ -47,6 +49,27 @@ func ACL() bool {
 
 // role-based-access-control
 func RBAC() bool {
+	e, err := casbin.NewEnforcer("../casbin/rbacconfig/model.conf", "../casbin/rbacconfig/policy.csv")
+	if err != nil {
+		log.Fatalf("NewEnforecer faild :%v \n", err)
+	}
 
+	if ok := check(e, "fage", "data", "read"); !ok {
+		log.Fatal("222")
+		return false
+	}
+
+	if ok := check(e, "fage", "data", "write"); !ok {
+		log.Fatal("111")
+		return false
+	}
+
+	if ok := check(e, "lizi", "data", "read"); !ok {
+		return false
+	}
+
+	if ok := check(e, "lizi", "data", "write"); ok {
+		return false
+	}
 	return true
 }

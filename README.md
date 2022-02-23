@@ -13,18 +13,18 @@
     gormx 扩展
     mysql、postgres、sqlite
 
-- restful 理论  
-- redis
+- restful 理论  get post  put  delete 
+- redis 
+- casbin PERM   https://zhuanlan.zhihu.com/p/148353743  ACL RBAC 
 
-mq
+mqtt协议 rabbitmq/kafkka
 http/net  socket tcp websocket
-
+cli
 多线程
-数据库分库分表、优化
-微服务
-grpc
-
-
+grpc/protocolbuffer
 wire  go 注入
-k8s、elasticserach
-https://zhuanlan.zhihu.com/p/148353743
+elasticserach
+微服务
+数据库分库分表、优化
+devops
+k8s
