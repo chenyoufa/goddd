@@ -6,37 +6,39 @@ import (
 	"net"
 )
 
-func process(conn net.Conn) {
+func proccess(conn net.Conn) {
 	defer conn.Close()
-	for {
-		var buf []byte
-		reader := bufio.NewReader(conn)
 
-		n, err := reader.Read(buf)
+	for {
+		var bytebuff [128]byte
+		reader := bufio.NewReader(conn)
+		n, err := reader.Read(bytebuff[:])
 		if err != nil {
-			fmt.Println("reader err:", err)
+			fmt.Println(err)
 			break
 		}
-		strconv := string(buf[:n])
-		fmt.Println("access string :", strconv)
-		conn.Write([]byte(strconv))
+		val := string(bytebuff[:n])
+		fmt.Println("accept val ,", val)
+		val = val + ";r"
+		conn.Write([]byte(val))
+
 	}
 }
 
 func main() {
 
-	listen, err := net.Listen("tcp", "127.0.0.1:8520")
+	listen, err := net.Listen("tcp", "127.0.0.1:8085")
 	if err != nil {
-		fmt.Println("Listen fail err:", err)
+		fmt.Println("listen faile err,", err)
 		return
 	}
 	for {
 		conn, err := listen.Accept()
 		if err != nil {
-			fmt.Println("accept fail err:", err)
+			fmt.Println("listen faile err,", err)
 			continue
 		}
-		go process(conn)
+		go proccess(conn)
 	}
 
 }
