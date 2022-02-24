@@ -20,17 +20,7 @@ func Decode(r bufio.Reader) (string, error) {
 		fmt.Println("read length fail err,", err)
 		return "", err
 	}
-	if r.Buffered() < (length + 4) {
-		fmt.Println("fail ")
-		return "", nil
-	}
-	var messageby = make([]byte, int(4+length))
-	_, err = r.Read(messageby)
-	if err != nil {
-		fmt.Println("read messageby fail err,", err)
-		return "", err
-	}
-	return string(messageby[4:]), nil
+	if r.Buffered()<(length+4)
 
 }
 func Encode(message string) ([]byte, error) {

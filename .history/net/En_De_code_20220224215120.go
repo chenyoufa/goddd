@@ -24,13 +24,8 @@ func Decode(r bufio.Reader) (string, error) {
 		fmt.Println("fail ")
 		return "", nil
 	}
-	var messageby = make([]byte, int(4+length))
-	_, err = r.Read(messageby)
-	if err != nil {
-		fmt.Println("read messageby fail err,", err)
-		return "", err
-	}
-	return string(messageby[4:]), nil
+	var messageby [length + 4]byte
+	n, err := r.Read(messageby[:])
 
 }
 func Encode(message string) ([]byte, error) {

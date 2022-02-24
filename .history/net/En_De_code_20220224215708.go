@@ -30,7 +30,7 @@ func Decode(r bufio.Reader) (string, error) {
 		fmt.Println("read messageby fail err,", err)
 		return "", err
 	}
-	return string(messageby[4:]), nil
+	return string(messageby[4:])
 
 }
 func Encode(message string) ([]byte, error) {

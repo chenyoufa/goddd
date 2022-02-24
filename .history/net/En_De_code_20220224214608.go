@@ -14,23 +14,6 @@ func Decode(r bufio.Reader) (string, error) {
 		return "", err
 	}
 	buffer := bytes.NewBuffer(vbytes)
-	var length int
-	err = binary.Read(buffer, binary.LittleEndian, &length)
-	if err != nil {
-		fmt.Println("read length fail err,", err)
-		return "", err
-	}
-	if r.Buffered() < (length + 4) {
-		fmt.Println("fail ")
-		return "", nil
-	}
-	var messageby = make([]byte, int(4+length))
-	_, err = r.Read(messageby)
-	if err != nil {
-		fmt.Println("read messageby fail err,", err)
-		return "", err
-	}
-	return string(messageby[4:]), nil
 
 }
 func Encode(message string) ([]byte, error) {
