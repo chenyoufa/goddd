@@ -17,15 +17,18 @@
 - redis 
 - casbin PERM   https://zhuanlan.zhihu.com/p/148353743  ACL RBAC 
 - http/net  socket tcp websocket
-
-mqtt协议 rabbitmq/kafkka
+- 多线程
 
 cli
-多线程
+mqtt协议 rabbitmq/kafkka
 grpc/protocolbuffer
+微服务
+
+
 wire  go 注入
 elasticserach
-微服务
 数据库分库分表、优化
 devops
 k8s
+
+深圳深有智能科技有限公司
