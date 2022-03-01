@@ -20,7 +20,7 @@
 - 多线程
 - cli
 
-mqtt协议 rabbitmq/kafkka
+mqtt协议 rabbitmq/kafkka mq
 grpc/protocolbuffer
 微服务
 
