@@ -7,7 +7,7 @@ import (
 	"github.com/streadway/amqp"
 )
 
-const MQURL = "amqp://kuteng:kuteng@127.0.0.1:5672/kuteng"
+const MQURL = "amqp://admin:123456@127.0.0.1:5672/kuteng"
 
 type RabbitMQ struct {
 	conn      *amqp.Connection
@@ -15,7 +15,7 @@ type RabbitMQ struct {
 	QueueName string
 	Exchange  string
 	Key       string
-	Mqurl     string
+	Mqurll    string
 }
 
 func NewRabbitMQ(queueName string, exchange string, key string) *RabbitMQ {
@@ -23,13 +23,15 @@ func NewRabbitMQ(queueName string, exchange string, key string) *RabbitMQ {
 		QueueName: queueName,
 		Exchange:  exchange,
 		Key:       key,
-		Mqurl:     MQURL,
+		Mqurll:    MQURL,
 	}
 }
+
 func (r *RabbitMQ) Destory() {
 	r.channel.Close()
 	r.conn.Close()
 }
+
 func (r *RabbitMQ) failOnErr(err error, message string) {
 	if err != nil {
 		log.Fatalf("%s:%s", message, err)
@@ -38,36 +40,31 @@ func (r *RabbitMQ) failOnErr(err error, message string) {
 }
 
 func NewRabbitMQSimple(queueName string) *RabbitMQ {
-	//创建rabbitmq 实例
 	rabbitmq := NewRabbitMQ(queueName, "", "")
 	var err error
-	rabbitmq.conn, err = amqp.Dial(rabbitmq.Mqurl)
-	rabbitmq.failOnErr(err, "failed to connect rabb itmq!")
+	rabbitmq.conn, err = amqp.Dial(rabbitmq.Mqurll)
+	rabbitmq.failOnErr(err, "failed to connect rabbitmq!")
+
 	rabbitmq.channel, err = rabbitmq.conn.Channel()
-	rabbitmq.failOnErr(err, "failde to open a channel")
+	rabbitmq.failOnErr(err, "failed to open a channel !")
 	return rabbitmq
 }
 
 func (r *RabbitMQ) PublishSimple(message string) {
-	//1.申请队列，如果队列不存在会自动创建，存在则跳过创建
+
 	_, err := r.channel.QueueDeclare(
 		r.QueueName,
-		//是否持久化
 		false,
-		//是否自动删除
 		false,
-		//是否具有排他性
 		false,
-		//是否阻塞处理
 		false,
-		//额外的属性
 		nil,
 	)
 	if err != nil {
 		fmt.Println(err)
 	}
 	r.channel.Publish(
-		r.Exchange,
+		"",
 		r.QueueName,
 		false,
 		false,
@@ -75,11 +72,9 @@ func (r *RabbitMQ) PublishSimple(message string) {
 			ContentType: "text/plain",
 			Body:        []byte(message),
 		})
-
 }
 
 func (r *RabbitMQ) ConsumeSimple() {
-	//1.申请队列，如果队列不存在会自动创建，存在则跳过创建
 	q, err := r.channel.QueueDeclare(
 		r.QueueName,
 		false,
@@ -104,14 +99,11 @@ func (r *RabbitMQ) ConsumeSimple() {
 		fmt.Println(err)
 	}
 	forever := make(chan bool)
-	//启用协程处理消息
 	go func() {
 		for d := range msgs {
-			//消息逻辑处理，可以自行设计逻辑
-			log.Printf("Received a message: %s", d.Body)
-
+			log.Printf("Received a message:%s ", d.Body)
 		}
 	}()
-	log.Printf(" [*] Waiting for messages. To exit press CTRL+C")
+	log.Printf("[*] Waiting for message . to exit press ctrl +c")
 	<-forever
 }
