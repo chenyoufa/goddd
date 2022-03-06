@@ -1,0 +1,25 @@
+syntax="proto3"
+
+package go.micro.srv.consignment;
+
+//货轮微服务
+service ShippingService{
+    //托运一批货物
+    rpc CreateConsignment(Consignment) returns(Response){
+    }
+}
+//货轮承载的一批货物
+message Consignment {
+    string id=1 ;  //货物编号
+    string description=2; //货物描述
+    int32 weight=3;  //货物重量
+    repeated Container containers=4;  //这批货物有哪些集装箱
+        string vessel_id=5;  //承载的货轮
+}
+//单个集装箱
+message Container{
+    string id=1;
+    string customer_id=2; //集装箱所属客户的编号
+}
+
+}

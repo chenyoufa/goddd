@@ -1,0 +1,2 @@
+build:
+	protoc -I. --go_out=plugins=grpc:/home/fage/workspace/go/web/  proto/consignment/consignment.proto

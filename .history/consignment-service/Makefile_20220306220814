@@ -1,0 +1,3 @@
+build:
+	protoc -l. --go_out=plugins=consignment-service  proto/consignment/consignment.proto
+	

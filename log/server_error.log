@@ -1,9 +1,0 @@
-[thrgo]2022/01/18 - 15:04:53.746	[31merror[0m	/home/fage/workspace/go/thrgo/core/server.go:49	accept tcp [::]:8888: use of closed network connection
-[thrgo]2022/01/18 - 15:48:54.273	[31merror[0m	/home/fage/workspace/go/thrgo/core/server.go:49	accept tcp [::]:8888: use of closed network connection
-[thrgo]2022/01/18 - 15:51:32.587	[31merror[0m	/home/fage/workspace/go/thrgo/core/server.go:49	accept tcp [::]:8888: use of closed network connection
-[thrgo]2022/01/18 - 15:51:53.011	[31merror[0m	/home/fage/workspace/go/thrgo/core/server.go:49	accept tcp [::]:8888: use of closed network connection
-[thrgo]2022/01/18 - 15:52:55.035	[31merror[0m	/home/fage/workspace/go/thrgo/core/server.go:49	accept tcp [::]:8888: use of closed network connection
-[thrgo]2022/01/18 - 15:53:50.508	[31merror[0m	/home/fage/workspace/go/thrgo/core/server.go:49	accept tcp [::]:8888: use of closed network connection
-[thrgo]2022/01/18 - 15:55:11.255	[31merror[0m	/home/fage/workspace/go/thrgo/core/server.go:49	accept tcp [::]:8888: use of closed network connection
-[thrgo]2022/01/18 - 15:55:28.399	[31merror[0m	/home/fage/workspace/go/thrgo/core/server.go:49	accept tcp [::]:8888: use of closed network connection
-[thrgo]2022/01/18 - 16:09:21.002	[31merror[0m	/home/fage/workspace/go/thrgo/core/server.go:49	accept tcp [::]:8888: use of closed network connection
