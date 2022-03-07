@@ -9,53 +9,55 @@ import (
 	"google.golang.org/grpc"
 )
 
-const (
-	PORT = ":50051"
-)
-
-//仓库接口
-type IRespository interface {
-	Create(consignment *pb.Consignment) (*pb.Consignment, error) //存放新货物
+type IRepository interface {
+	Create(consignment *pb.Consignment) (*pb.Consignment, error)
 }
 
-//我们存放多批货物的仓库，实现了IRepository接口
 type Repository struct {
 	consignments []*pb.Consignment
 }
 
-func (repo *Repository) Create(consignment *pb.Consignment) (*pb.Consignment, error) {
-	repo.consignments = append(repo.consignments, consignment)
+func (r *Repository) Create(consignment *pb.Consignment) (*pb.Consignment, error) {
+	r.consignments = append(r.consignments, consignment)
 	return consignment, nil
 }
 
-func (repo *Repository) GetAll() []*pb.Consignment {
-	return repo.consignments
+func (r *Repository) GetAll() []*pb.Consignment {
+	return r.consignments
 }
 
-//定义微服务
-type service struct {
-	repo Repository
+type Service struct {
+	rep Repository
 }
 
-func (s *service) CreateConsignment(ctx context.Context, req *pb.Consignment) (*pb.Response, error) {
-	consignment, err := s.repo.Create(req)
+func (s *Service) CreateConsignment(ctx context.Context, in *pb.Consignment) (*pb.Response, error) {
+	news, err := s.rep.Create(in)
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
-	resp := &pb.Response{Created: true, Consignment: consignment}
+	return &pb.Response{Created: true, Consignment: news}, nil
+}
+
+func (s *Service) GetConsignments(ctx context.Context, req *pb.GetRequest) (*pb.Response, error) {
+	allconsignments := s.rep.GetAll()
+	resp := &pb.Response{Consignments: allconsignments}
 	return resp, nil
 }
 
 func main() {
-	listener, err := net.Listen("tcp", PORT)
+
+	listener, err := net.Listen("tcp", ":8080")
 	if err != nil {
-		log.Fatalf("failed to listen:%v", err)
+		log.Println(err)
 	}
-	log.Printf("listen on:%s\n", PORT)
 	server := grpc.NewServer()
 	repo := Repository{}
-	pb.RegisterShippingServiceServer(server, &service{repo})
+	pb.RegisterShippingServerServer(server, &Service{repo})
+	log.Println("run serve  ...")
+
 	if err := server.Serve(listener); err != nil {
 		log.Fatalf("failed to serve:%v", err)
 	}
+
 }
