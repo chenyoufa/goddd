@@ -10,3 +10,4 @@ WORKDIR /app
 ADD consignment-service /app/consignment-servicce
 
 CMD ["./consignment-service"]
+
