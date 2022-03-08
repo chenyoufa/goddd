@@ -1,0 +1,31 @@
+ syntax="proto3";
+
+ package go.micro.src.consignment;
+
+ service shippingService {
+
+    rpc CreateConsignment()returns(){
+
+    }
+    rpc GetConsignments()returns(){
+
+    }
+
+ }
+//托运一批货物
+message Consignment{
+    string id=1;
+    string descrition=2;
+    int32 weight=3;
+    repeated container Container=4;
+    string origin=5;
+    string vessel_id=6;
+
+}
+//集装箱
+message Container{  
+    string user_id=1;
+    string coument_id=2;
+
+
+} 

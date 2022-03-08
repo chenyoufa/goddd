@@ -3,14 +3,11 @@ package main
 import (
 	"context"
 	pb "demo1/consignment-service/proto/consignment"
-	"log"
 	"net"
-
-	"google.golang.org/grpc"
 )
 
 const (
-	PORT = ":8080"
+	PORT = "8080"
 )
 
 type IRepository interface {
@@ -43,17 +40,6 @@ func (s *Service) GetConsignments(context.Context, *pb.Request) (*pb.Response, e
 
 func main() {
 
-	listener, err := net.Listen("tcp", PORT)
-	if err != nil {
-		log.Printf("listen fail  ", err)
-	}
-	log.Println("run port ", PORT)
-	server := grpc.NewServer()
-
-	rsp := Repository{}
-	pb.RegisterShippingServiceServer(server, &Service{rep: rsp})
-	if err := server.Serve(listener); err != nil {
-		log.Printf("server run fail ", err)
-	}
+	listener := net.Listen("tcp", PORT)
 
 }

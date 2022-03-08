@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	PORT = ":8080"
+	PORT = "8080"
 )
 
 type IRepository interface {

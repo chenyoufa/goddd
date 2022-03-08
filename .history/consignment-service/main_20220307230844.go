@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	PORT = ":8080"
+	PORT = "8080"
 )
 
 type IRepository interface {
@@ -47,13 +47,11 @@ func main() {
 	if err != nil {
 		log.Printf("listen fail  ", err)
 	}
-	log.Println("run port ", PORT)
 	server := grpc.NewServer()
-
+	service := Service{}
 	rsp := Repository{}
-	pb.RegisterShippingServiceServer(server, &Service{rep: rsp})
+	pb.RegisterShippingServiceServer(server, &service{rep: rsp})
 	if err := server.Serve(listener); err != nil {
 		log.Printf("server run fail ", err)
 	}
-
 }

@@ -4,10 +4,10 @@
 
  service shippingService {
 
-    rpc CreateConsignment(Consignment)returns(Response){
+    rpc CreateConsignment()returns(){
 
     }
-    rpc GetConsignments(Request)returns(Response){
+    rpc GetConsignments()returns(){
 
     }
 
@@ -17,7 +17,7 @@ message Consignment{
     string id=1;
     string descrition=2;
     int32 weight=3;
-    repeated  Container containers=4;
+    repeated container Container=4;
     string vessel_id=6;
 
 }

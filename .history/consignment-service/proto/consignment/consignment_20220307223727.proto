@@ -1,0 +1,23 @@
+ syntax="proto3";
+
+ package go.micro.src.consignment;
+
+ service shippingService {
+
+    rpc CreateConsignment()returns(){
+
+    }
+    rpc GetConsignments()returns(){
+
+    }
+
+ }
+//托运一批货物
+message Consignment{
+
+
+}
+//集装箱
+message jz{
+
+} 

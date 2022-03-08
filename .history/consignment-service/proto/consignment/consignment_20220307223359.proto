@@ -1,0 +1,7 @@
+ syntax="proto3";
+
+ package go.micro.src.consignment;
+
+ service shippingService {
+
+ }
