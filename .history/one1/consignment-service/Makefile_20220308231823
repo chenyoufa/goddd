@@ -1,0 +1,12 @@
+build:
+	protoc -I. --go_out=plugins=grpc:$(shell pwd)  proto/consignment/consignment.proto 
+	GOOS=linux GOARCH=amd64 go build -o rollingupdatev2 main.go
+	docker build -t consignment-service .
+run:
+	docker run -p 50051:50051 -it  consignment-service  bash
+
+micro:
+	protoc -I. --go_out=plugins=micro:$(shell pwd)  proto/consignment/consignment.proto
+
+
+	/home/fage/workspace/go/thrgoweb/Dockerfile

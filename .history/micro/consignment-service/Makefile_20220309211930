@@ -1,0 +1,2 @@
+build:
+	protoc -I . --go_out=plugins=micro:$(shell pwd) proto/consignment/consignment.proto

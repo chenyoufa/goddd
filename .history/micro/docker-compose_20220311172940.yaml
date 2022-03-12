@@ -1,0 +1,6 @@
+version: '3.1'
+
+vessel-service:
+  build:./vessel-service
+  ports:
+    -50052:50051

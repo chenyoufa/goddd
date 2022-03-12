@@ -1,0 +1,15 @@
+package main
+
+import (
+	pb "demo1/micro/consignment-service/proto/consignment"
+)
+
+type IRepository interface {
+	Create(consignment *pb.Consignment) (*pb.Consignment, error)
+}
+
+type Repository struct {
+	consignments []*pb.Consignment
+}
+
+func (rep *Repository) Create(consignment *pb.Consignment) (*pb.Consignment, error)

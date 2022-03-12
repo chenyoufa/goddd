@@ -1,0 +1,8 @@
+build:
+	GOOS=linux GOARCH=amd64 go build  --tags  netgo -o  vessel-service main.go
+	docker build  -t vessel-service  .
+micro:
+	protoc -I. --go_out=plugins=micro:$(shell pwd)  proto/vesser-service.proto
+
+run:
+	docker run -p 50052:50051 -e MICRO-SERVER_ADDRESS=:50051 -e MICRO_REGISTRY=mdns vessel-service

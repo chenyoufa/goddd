@@ -1,0 +1,26 @@
+syntax ="proto3";
+
+package go.micro.svr.consignment;
+
+service ShippingService {
+    rpc CreateConsignment(Consignment) returns(Response) {
+    }
+    rpc GetAll(GetRequest)returns(Response) {
+    }
+}
+
+message Consignment {
+
+}
+
+message Container {
+
+}
+
+message  Response{
+
+}
+
+message GetRequest{
+
+}

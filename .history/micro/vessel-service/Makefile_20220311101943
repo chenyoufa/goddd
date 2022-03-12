@@ -1,0 +1,6 @@
+build:
+	
+micro:
+	protoc -I. --go_out=plugins=micro:$(shell pwd)  proto/vesser-servicet.proto
+
+

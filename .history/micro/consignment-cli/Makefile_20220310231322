@@ -1,0 +1,6 @@
+build:
+	GOOS=linux GOARCH=amd64  go buld -tags netgo  -o cli cli.go
+	docker build -t cli .
+
+	GOOS=linux GOARCH=amd64 go build -tags netgo -o consignment-service main.go
+	docker build -t consignment-service   .

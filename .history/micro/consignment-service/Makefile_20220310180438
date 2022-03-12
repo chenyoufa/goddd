@@ -1,0 +1,11 @@
+proto:
+	protoc -I . --go_out=plugins=micro:$(shell pwd) proto/consignment/consignment.proto
+
+build:
+	GOOS=linux GOARCH=amd64 go build -tags netgo -o consignment-service main.go
+	docker build -t consignment-service .
+
+	# GOOS=linux GOARCH=amd64 go build -tags  netgo -o consignment-service 	main.go
+	# docker build   -t consignment-service  .
+run:
+	docker run -p 8080:8080 -it consignment-service

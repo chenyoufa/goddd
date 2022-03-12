@@ -1,0 +1,6 @@
+build:
+	GOOS=linux GOARCH=amd64 go build  --tags  netgo -o  vessser-service main.go
+micro:
+	protoc -I. --go_out=plugins=micro:$(shell pwd)  proto/vesser-service.proto
+
+

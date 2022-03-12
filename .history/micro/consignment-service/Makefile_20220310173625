@@ -1,0 +1,7 @@
+proto:
+	protoc -I . --go_out=plugins=micro:$(shell pwd) proto/consignment/consignment.proto
+
+build:
+
+	docker build   -t consignment-service  .
+

@@ -1,0 +1,79 @@
+package main
+
+import (
+	"context"
+	pb "demo1/micro/consignment-service/proto/consignment"
+	vesselPb "demo1/micro/vessel-service/proto"
+	"log"
+
+	micro "github.com/micro/go-micro/v2"
+)
+
+type IRepository interface {
+	Create(consignment *pb.Consignment) (*pb.Consignment, error)
+}
+
+type Repository struct {
+	consignments []*pb.Consignment
+}
+
+func (rep *Repository) Create(consignment *pb.Consignment) (*pb.Consignment, error) {
+	rep.consignments = append(rep.consignments, consignment)
+	return consignment, nil
+}
+
+func (rep *Repository) GetAll() []*pb.Consignment {
+	return rep.consignments
+}
+
+type Service struct {
+	rep          Repository
+	vesselClient vesselPb.VesselServiceClient
+}
+
+func (s *Service) CreateConsignment(ctx context.Context, new_consignment *pb.Consignment, resp *pb.Response) error {
+	vReq := &vesselPb.Specification{
+		Capacity:  int32(len(new_consignment.Containers)),
+		MaxWeight: new_consignment.Weight,
+	}
+	vResp, err := s.vesselClient.FindAvailable(context.Background(), vReq)
+	if err != nil {
+		return err
+	}
+	// 货物被承运
+	log.Printf("found vessel: %s\n", vResp.Vessel.Name)
+	new_consignment.VesselId = vResp.Vessel.Id
+	p, err := s.rep.Create(new_consignment)
+	if err != nil {
+		log.Printf("create consignment fail err:%v", err)
+		return err
+	}
+	log.Println("test_p:", p)
+	// resp = &pb.Response{Created: true, Consignment: p}
+	resp.Created = true
+	resp.Consignment = p
+	return nil
+}
+
+func (s *Service) GetAll(ctx context.Context, rq *pb.GetRequest, resp *pb.Response) error {
+	all := s.rep.GetAll()
+	// resp = &pb.Response{Consignments: all}
+	resp.Consignments = all
+	return nil
+}
+
+func main() {
+
+	service := micro.NewService(
+		micro.Name("go.micro.srv.consignment"),
+		micro.Version("latest"),
+	)
+	service.Init()
+	repo := Repository{}
+	vClient := vesselPb.NewVesselServiceClient("go.micro.srv.vessel", service.Client())
+	pb.RegisterShippingServiceHandler(service.Server(), &Service{repo, vClient})
+	if err := service.Run(); err != nil {
+		log.Fatalf("failed to serve: %v", err)
+	}
+
+}
