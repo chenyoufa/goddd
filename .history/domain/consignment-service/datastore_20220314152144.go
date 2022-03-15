@@ -25,7 +25,9 @@ type Config struct {
 	TablePrefix  string
 }
 
-func (c *Config) New() (*gorm.DB, error) {
+var golbalDB *gorm.DB
+
+func (c *Config) Connect() (*gorm.DB, error) {
 	var dialector gorm.Dialector
 
 	switch strings.ToLower(c.DBType) {
@@ -66,7 +68,8 @@ func (c *Config) New() (*gorm.DB, error) {
 	sqlDB.SetMaxOpenConns(c.MaxIdleConns)
 	sqlDB.SetMaxIdleConns(c.MaxIdleConns)
 	sqlDB.SetConnMaxLifetime(time.Duration(c.MaxLifetime))
-
+	// db.AutoMigrate()
+	golbalDB = db
 	return db, nil
 }
 
@@ -80,4 +83,8 @@ func createDatabaseWithMySQL(cfg *mysqlDriver.Config) error {
 	query := fmt.Sprintf("create database if not exits `%s` default  character set =`utf8mb4`;", cfg.DBName)
 	_, err = db.Exec(query)
 	return err
+}
+
+func init() {
+
 }
