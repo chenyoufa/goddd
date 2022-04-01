@@ -133,6 +133,7 @@ func NewTxImpl() *txImpl {
 
 func (*txImpl) Transaction(ctx context.Context, fn func(txctx context.Context) error) error {
 	db := globalDB.WithContext(ctx)
+
 	return db.Transaction(func(tx *gorm.DB) error {
 		txctx := CtxWithTransaction(ctx, tx)
 		return fn(txctx)
@@ -174,8 +175,10 @@ func WithOffsetLimit(db *gorm.DB, offset, limit int) *gorm.DB {
 	if offset > 0 {
 		db = db.Offset(offset)
 	}
+
 	if limit > 0 {
 		db = db.Limit(limit)
 	}
+
 	return db
 }

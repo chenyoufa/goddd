@@ -21,9 +21,11 @@ import (
 )
 
 var (
-	globalDB     *gorm.DB
+	globalDB *gorm.DB
+
 	globalConfig *DBConfig
-	injectors    []func(db *gorm.DB)
+
+	injectors []func(db *gorm.DB)
 )
 
 func Connect(cfg *DBConfig) error {
@@ -100,7 +102,6 @@ func NewUlid() string {
 	now := time.Now()
 	return ulid.MustNew(ulid.Timestamp(now), ulid.Monotonic(rand.New(rand.NewSource(now.UnixNano())), 0)).String()
 }
-
 func registerCallback(db *gorm.DB) {
 	// 自动添加uuid
 	err := db.Callback().Create().Before("gorm:create").Register("uuid", func(db *gorm.DB) {
@@ -133,6 +134,7 @@ func NewTxImpl() *txImpl {
 
 func (*txImpl) Transaction(ctx context.Context, fn func(txctx context.Context) error) error {
 	db := globalDB.WithContext(ctx)
+
 	return db.Transaction(func(tx *gorm.DB) error {
 		txctx := CtxWithTransaction(ctx, tx)
 		return fn(txctx)
@@ -158,24 +160,4 @@ func GetDB(ctx context.Context) *gorm.DB {
 
 func GetDBConfig() DBConfig {
 	return *globalConfig
-}
-
-// 自动初始化表结构
-func SetupTableModel(db *gorm.DB, model interface{}) {
-	if GetDBConfig().AutoMigrate {
-		err := db.AutoMigrate(model)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-}
-
-func WithOffsetLimit(db *gorm.DB, offset, limit int) *gorm.DB {
-	if offset > 0 {
-		db = db.Offset(offset)
-	}
-	if limit > 0 {
-		db = db.Limit(limit)
-	}
-	return db
 }

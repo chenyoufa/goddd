@@ -1,6 +1,6 @@
 package dbcore
 
-type DBConfig struct {
+type Config struct {
 	Debug        bool
 	DbType       string
 	DSN          string
@@ -11,7 +11,7 @@ type DBConfig struct {
 	AutoMigrate  bool
 }
 
-func defaultDbConfig(cfg *DBConfig) *DBConfig {
+func defaultDbConfig(cfg *Config) *Config {
 	newCfg := *cfg
 	if newCfg.MaxIdleConns == 0 {
 		newCfg.MaxIdleConns = 10
@@ -20,5 +20,6 @@ func defaultDbConfig(cfg *DBConfig) *DBConfig {
 	if newCfg.MaxOpenConns == 0 {
 		newCfg.MaxOpenConns = 20
 	}
+
 	return &newCfg
 }

@@ -100,7 +100,6 @@ func NewUlid() string {
 	now := time.Now()
 	return ulid.MustNew(ulid.Timestamp(now), ulid.Monotonic(rand.New(rand.NewSource(now.UnixNano())), 0)).String()
 }
-
 func registerCallback(db *gorm.DB) {
 	// 自动添加uuid
 	err := db.Callback().Create().Before("gorm:create").Register("uuid", func(db *gorm.DB) {
@@ -133,6 +132,7 @@ func NewTxImpl() *txImpl {
 
 func (*txImpl) Transaction(ctx context.Context, fn func(txctx context.Context) error) error {
 	db := globalDB.WithContext(ctx)
+
 	return db.Transaction(func(tx *gorm.DB) error {
 		txctx := CtxWithTransaction(ctx, tx)
 		return fn(txctx)
@@ -174,8 +174,10 @@ func WithOffsetLimit(db *gorm.DB, offset, limit int) *gorm.DB {
 	if offset > 0 {
 		db = db.Offset(offset)
 	}
+
 	if limit > 0 {
 		db = db.Limit(limit)
 	}
+
 	return db
 }

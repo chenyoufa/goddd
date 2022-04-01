@@ -174,8 +174,10 @@ func WithOffsetLimit(db *gorm.DB, offset, limit int) *gorm.DB {
 	if offset > 0 {
 		db = db.Offset(offset)
 	}
+
 	if limit > 0 {
 		db = db.Limit(limit)
 	}
+
 	return db
 }

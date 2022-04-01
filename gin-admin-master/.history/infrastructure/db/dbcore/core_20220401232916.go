@@ -1,12 +1,10 @@
 package dbcore
 
 import (
-	"context"
 	"database/sql"
 	"fmt"
 	"log"
 	"math/rand"
-	"reflect"
 	"strings"
 	"time"
 
@@ -21,9 +19,11 @@ import (
 )
 
 var (
-	globalDB     *gorm.DB
+	globalDB *gorm.DB
+
 	globalConfig *DBConfig
-	injectors    []func(db *gorm.DB)
+
+	injectors []func(db *gorm.DB)
 )
 
 func Connect(cfg *DBConfig) error {
@@ -100,7 +100,6 @@ func NewUlid() string {
 	now := time.Now()
 	return ulid.MustNew(ulid.Timestamp(now), ulid.Monotonic(rand.New(rand.NewSource(now.UnixNano())), 0)).String()
 }
-
 func registerCallback(db *gorm.DB) {
 	// 自动添加uuid
 	err := db.Callback().Create().Before("gorm:create").Register("uuid", func(db *gorm.DB) {
@@ -114,68 +113,4 @@ func callInjector(db *gorm.DB) {
 	for _, v := range injectors {
 		v(db)
 	}
-}
-
-type ctxTransactionKey struct{}
-
-func CtxWithTransaction(ctx context.Context, tx *gorm.DB) context.Context {
-	if ctx == nil {
-		ctx = context.Background()
-	}
-	return context.WithValue(ctx, ctxTransactionKey{}, tx)
-}
-
-type txImpl struct{}
-
-func NewTxImpl() *txImpl {
-	return &txImpl{}
-}
-
-func (*txImpl) Transaction(ctx context.Context, fn func(txctx context.Context) error) error {
-	db := globalDB.WithContext(ctx)
-	return db.Transaction(func(tx *gorm.DB) error {
-		txctx := CtxWithTransaction(ctx, tx)
-		return fn(txctx)
-	})
-}
-
-// 如果使用跨模型事务则传参
-func GetDB(ctx context.Context) *gorm.DB {
-	iface := ctx.Value(ctxTransactionKey{})
-
-	if iface != nil {
-		tx, ok := iface.(*gorm.DB)
-		if !ok {
-			log.Panicf("unexpect context value type: %s", reflect.TypeOf(tx))
-			return nil
-		}
-
-		return tx
-	}
-
-	return globalDB.WithContext(ctx)
-}
-
-func GetDBConfig() DBConfig {
-	return *globalConfig
-}
-
-// 自动初始化表结构
-func SetupTableModel(db *gorm.DB, model interface{}) {
-	if GetDBConfig().AutoMigrate {
-		err := db.AutoMigrate(model)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-}
-
-func WithOffsetLimit(db *gorm.DB, offset, limit int) *gorm.DB {
-	if offset > 0 {
-		db = db.Offset(offset)
-	}
-	if limit > 0 {
-		db = db.Limit(limit)
-	}
-	return db
 }
